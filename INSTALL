@@ -18,4 +18,5 @@ Set LIVE=False in your settings.py to run devel server with sqlite.
 
 4) syncdb, runserver
 
-
+** add 1 of each type of meal (3 in all) and a dateset for the menu to work.  
+This app was special-cased for a client and could use some abstraction.

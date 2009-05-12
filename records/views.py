@@ -154,10 +154,10 @@ def ecf(request):
     try:
         ec = EmergencyContacts.objects.get(user=profile)
         if request.method == 'POST':
-              form = EmergencyContactsForm(request.POST, instance=ec)
-            if form.is_valid():
-                form.save()
-                return HttpResponseRedirect('/records/')
+            form = EmergencyContactsForm(request.POST, instance=ec)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/records/')
         else:
             form = EmergencyContactsForm(instance=ec)
 
@@ -325,14 +325,14 @@ def apply(request):
                 student = Student.objects.filter(user=profile).filter(last=instance.last).get(first=instance.first)
                 return HttpResponseRedirect('/records/apply/questions/%s' % student.id)
 
-            except:        
-                 instance.user = profile
+            except:
+                instance.user = profile
                 student = instance.save()
                 return HttpResponseRedirect('/records/apply/questions/%s' % instance.id)
 
     else:
         form = StudentApplyForm()
-            
+
     context = {'profile':profile, 'form':form}
     return render_to_response('records/apply.html', context, context_instance=RequestContext(request))
 
@@ -466,25 +466,23 @@ def questions(request, id):
         if profile == UserProfile.objects.get(student__id=id):
 
             if request.method == 'POST':
-                   form = ApplicationForm(request.POST)
-            
-                if form.is_valid():
+                form = ApplicationForm(request.POST)
 
+                if form.is_valid():
                     instance = form.save(commit=False)
                     instance.student = student
                     instance.user = profile
                     instance.save()
-                    
+
                     if student.next_grade in ('6', '7', '8'):
                         return HttpResponseRedirect('/records/apply/questions/mssq/%s' % id)
-                
+
                     if instance.entering_6th_7th_or_8th:
                         return HttpResponseRedirect('/records/apply/questions/mssq/%s' % id)
-
                     else:
                         return HttpResponseRedirect('/records/apply/questions/parent/%s' % id)
 
-               else:
+            else:
                 form = ApplicationForm()
 
         else:

@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% if complete or uncomplete %}
+<p>Students have already completed the application process:</p>
+{% for s in complete %}
+	{{s.name}}
+{% endfor %}
+
+<p>Click on the student for whom you would like to finish the application process </p>
+{% for s in uncomplete %}
+<a href="/records/apply/complete/{{s.id}}/">{{s.name}}</a>
+{% endfor %}
+{% else %}
+<p>
+You have no students on records you can <a href="/records/apply/">Apply now &raquo;</a>.
+If you feel that you have reached this message in error.  Contact {{SUPPORT_EMAIL}}.
+</p>
+{% endif %}
+
+{% endblock %}

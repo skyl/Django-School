@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block extrahead %}
+{% endblock %}
+
+{% block content %}
+<h2>Meet Our People</h2>
+<p>To find out more about our people click on the picture</p>
+<div id="detail"></div>
+<div class="object_list" style="padding:0 0 0 10px">
+  {% for person in object_list %}
+    <div class="object">
+	    <h5 style="padding:5px 0;">{{person.name}}</h5>
+	    <a href='{{person.id}}/'><img src="{{MEDIA_URL}}{{person.pic}}" style="width:100;height:75;float:left;" /></a>
+	    <p style="padding: 0 0 0 120px;">{{ person.description|truncatewords:20 }}</p>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+<h2><em>Volunteer Form</em></h2>
+<p>Volunteer help is essential to controlling costs and providing many of the fine programs at our school. Parents have a
+special interest in seeing that their children are well served. Grandparents and other relatives are also encouraged to
+participate. Below is a list of areas where volunteer help is needed for effective school operation. Where can you help?</p>
+<form class="myForm_100" id="frmVolunteer" name="input" action="." method="post"><div class="formPadding">
+{% for field in form %}
+{% ifequal field.name 'grade_papers' %}<div class="frmDivider"></div><p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Classroom</h4></p>{% endifequal %}
+{% ifequal field.name 'supervise_playground' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Campus</h4></p>{% endifequal %}
+{% ifequal field.name 'substitute' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Academic</h4></p>{% endifequal %}
+{% ifequal field.name 'piano' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Music</h4></p>{% endifequal %}
+{% ifequal field.name 'check_out' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Library and Media left</h4></p>{% endifequal %}
+{% ifequal field.name 'bulletin_boards' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Arts</h4></p>{% endifequal %}
+{% ifequal field.name 'photography' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Yearbook</h4></p>{% endifequal %}
+{% ifequal field.name 'substitute_secretary' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Office</h4></p>{% endifequal %}
+{% ifequal field.name 'jogathon' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Fundraising</h4></p>{% endifequal %}
+{% ifequal field.name 'landscape' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Maintenance</h4></p>{% endifequal %}
+{% ifequal field.name 'business_equipment' %}<p style="text-align:left; width:100%;"><h4 style="padding:0 0 0 0.5em;">Resources</h4></p>{% endifequal %}
+      
+
+	{% ifequal field.field.widget.input_type "text" %}
+<div class="char_field">
+	{% else %}
+<div class="bool_field">
+	{% endifequal %}
+
+	{{ field.label_tag }} 
+	{% if field.help_text %}{{ field.help_text }}{% endif %}
+	{{ field }}
+	{% if field.errors %}<div class="myerrors">{{ field.errors }}</div>{% endif %}
+	</div>
+
+{% endfor %}
+<div class="submit"><input type="submit" value="Volunteer &raquo;"></div>
+</div></form> 
+
+{% endblock %}
+

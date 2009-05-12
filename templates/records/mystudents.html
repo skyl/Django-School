@@ -1,0 +1,39 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+{% if students %}
+  {% for student in students %}
+    <p>We have {{student.name}} in {{student.get_present_grade_display}} grade.</p>
+
+    {% if student.application_completed %} Application Completed!
+    {% else %}
+	<p>This student has not been flagged as having completed the application process</p>
+	<a>Here is where you go to do that</a> or call.
+    {% endif %}
+
+    {% if student.registration_signed_paid %} Registered!
+    {% else %}
+	<p>You need to register, this is where you do that:</p>
+	<a href="/mystudents/register/{{student.id}}">link_to_register_form (Goes to templates/register_student.html </a>
+    {% endif %}
+
+    {% if student.currently_student %}
+    	{{student.preferred_name}} has {% for teacher in student.teacher %}
+						{{teacher.title}} {{teacher.name}}
+					{% endfor %}
+    {% endif %} 
+    {% if not enrolled_for_upcoming_year and not alumni %} 
+		You still need to enroll for the upcoming year <a>here</a>
+    {% endif %}
+  {% endfor %}
+<p>Click here to add more students</p>
+<a></a>
+
+{% else %}
+<p>You have not added any students yet</p>
+<a>Click here to get started, the application, registration, and enrollment process takes less than 1 hour!</a>
+{% endif %}
+
+
+
+{% endblock %}

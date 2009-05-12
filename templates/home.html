@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if thanks %}
+  <h2>Payment Completed</h2>
+  <p>Your payment has been received. Thank you.</p>
+{% else %}
+<h2>Welcome to Django School</h2>
+
+{% endif %}
+{% endblock %}
+
+

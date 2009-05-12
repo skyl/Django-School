@@ -1,0 +1,23 @@
+{% extends "media/base_videos.html" %}
+
+
+{% block title %}{{ object.title }}{% endblock %}
+
+
+{% block content_title %}
+  <h2>{{ object.title }}</h2>
+{% endblock %}
+
+{% block content %}
+<div class="description">{{object.description}}</div>
+<p id='{{object.slug}}'>video goes here</p>
+<script type='text/javascript' src='http://media.skyl.org/swfobject.js'></script>
+<script type='text/javascript'>
+var s1 = new SWFObject('http://media.skyl.org/player.swf','player','400','300','9');
+s1.addParam('allowfullscreen','true');
+s1.addParam('allowscriptaccess','always');
+s1.addParam('flashvars','file={{MEDIA_URL}}{{object.video}}');
+s1.write('{{object.slug}}');
+</script>
+
+{% endblock %}

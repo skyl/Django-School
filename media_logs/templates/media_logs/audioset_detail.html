@@ -1,0 +1,19 @@
+{% extends "media/base_audio.html" %}
+
+
+{% block title %}{{ object.title }}{% endblock %}
+
+
+{% block content_title %}
+  <h2>{{ object.title }}</h2>
+{% endblock %}
+
+
+{% block content %}
+  <h3>Audios</h3>
+  <ul class="audio_list">
+    {% for audio in object.audios.all %}
+    <li><a href="{{ audio.get_absolute_url }}">{{ audio.title }}</a></li>
+    {% endfor %}
+  </ul>
+{% endblock %}

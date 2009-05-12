@@ -1,0 +1,132 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+
+{% if thanks %}
+  <h2>Payment Completed</h2>
+  <p>Your menu payment has been received. Thank you.</p>
+{% else %}
+<h2>Welcome to the Django School Family Dashboard</h2>
+<p>Thank you for using the online records system at Django School.  We hope that you have a pleasant and easy experience.  Please let us know if you have any difficulties.  <a href="mailto:skylar.saveland@gmail.com">Email Us &raquo;</a></p>
+<p><br />Since this is a new system, we are asking all households with students currently enrolled at CCS to enter the data below. Please encourage your friends to go through this process as well.</p>
+<p><br /><strong>The hot-lunch menu sign-up will be offered beginning Monday, March 16.</strong></p><br />
+{% endif %}
+
+{% if profile %}
+<div class="status complete">
+  <h5>Profile</h5>
+  <p>You have successfully created a profile for "{{profile.addressee}}". &nbsp;<a href='profile/'>Edit profile &raquo;</a></p>
+</div>
+{% else %}
+<div class="status incomplete">
+  <h5>Profile</h5>
+  <p>You have not created a basic profile of your household. &nbsp;<a href='profile/'>Add profile &raquo;</a></p>
+</div>
+{% endif %}
+
+{% if students %}
+<div class="status complete">
+<h5>Enrolled Students</h5>
+<p>You have added: &nbsp;&nbsp;
+{% for s in students %}
+{{s}} &nbsp;&nbsp;&nbsp;
+{%endfor%}
+<a href='students/add/'>Add another student &raquo;</a></p>
+
+</div>
+
+{% else %}
+<div class="status incomplete">
+  <h5>Enrolled Students</h5>
+  <p>You have not yet added any students to this account. <a href='students/add/'>Add students &raquo;</a></p>
+ </div>
+{% endif %}
+
+
+{% if guardians %}
+<div class="status complete">
+<h5>Parents/Guardians</h5>
+<p>{% for g in guardians %}
+{{g}} &nbsp;&nbsp;&nbsp;
+{% endfor %}
+<a href='guardians/'>Edit Parent/Guardian Info &raquo;</a></p>
+</div>
+
+{% else %}
+<div class="status incomplete">
+  <h5>Parents/Guardians</h5>
+  <p>You have not yet added any parent/guardian information. <a href='guardians/'>Add Parents/Guardians &raquo;</a></p>
+</div>
+{%endif%}
+
+{% if ecs %}
+<div class="status complete">
+<h5>Emergency Contacts</h5>
+<p>{% for p in contacts %}
+{{p}} &nbsp;&nbsp;
+{% endfor %}
+<a href='contacts/'>Update Emergency Contact Information &raquo;</a></p>
+</div>
+
+{% else %}
+<div class="status incomplete">
+  <h5>Emergency Contacts</h5>
+  <p>There are no emergency contacts entered. Two contacts are required. &nbsp;&nbsp;<a href='contacts/'>Add Emergency Contacts &raquo;</a></p>
+</div>
+{%endif%}
+
+{% if pickups %}
+<div class="status complete">
+<h5>Student Pickup</h5>
+<p>{% for p in pickups %}
+{{p}} &nbsp;&nbsp;
+{% endfor %}
+<a href='pickup/'>Edit Pickups &raquo;</a></p>
+</div>
+
+{% else %}
+<div class="status incomplete">
+  <h5>Student Pickup</h5>
+  <p>There is no pickup authorization for anyone other than parents/guardians. <a href='pickup/'>Add Pickups &raquo;</a></p>
+</div>
+{%endif%}
+
+{% if connections %}
+<div class="status complete">
+<h5>Grandparents/Friends</h5>
+<p>{% for c in connections %}
+{{c}} &nbsp;&nbsp;
+{% endfor %}
+<a href='family/'>Edit or Add More Grandparents/Friends &raquo;</a></p>
+</div>
+
+{% else %}
+<div class="status incomplete">
+  <h5>Grandparents/Friends</h5>
+  <p>You have not yet added any grandparents/family/friends. <a href='family/'>Add Grandparents/Friends &raquo;</a></p>
+</div>
+
+{%endif%}
+
+
+{% if volunteers %}
+<div class="status complete">
+<h5>Participation</h5>
+<p>{% for v in volunteers %}
+{{v}} &nbsp;&nbsp;
+{% endfor %}
+<a href='volunteer/'>Add Another Volunteer Profile &raquo;</a></p>
+</div>
+
+{% else %}
+<div class="status incomplete">
+  <h5>Volunteers</h5>
+  <p>No one on this account has provided any participation interests/skills. <a href='volunteer/'>Add Volunteer Interests &raquo;</a></p>
+</div>
+
+{%endif%}
+
+
+{% endblock %}
+
+

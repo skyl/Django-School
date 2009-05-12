@@ -1,0 +1,21 @@
+{% extends "admin/change_list.html" %}
+
+{% load i18n %}
+
+{% block object-tools %}
+{% if has_add_permission %}
+<ul class="object-tools">
+   <li><a href="add/{% if is_popup %}?_popup=1{% endif %}" class="addlink">
+{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}</a></li>
+   <li><a href="csv/{%if request.GET%}?{{request.GET.urlencode}}{%endif%}" class="">Export to CSV</a></li>
+<!--   <li><a href="mail/{{request.GET.urlencode}}", class="">Mail</a></li>-->
+</ul>
+<!--
+{{request.GET.urlencode}}
+{{cl.get_query_set}}
+{{cl.get_query_string}}
+-->
+{% endif %}
+{% endblock %}
+
+

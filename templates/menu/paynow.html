@@ -1,0 +1,20 @@
+	<div class="padding-menu-paynow">
+		    <p class="right">Subtotal: {{account.total}}</p>
+		    <p class="right">Credits: -{{ account.vouchers_total }}</p>
+		    <p class="right">Total: {{account.total_minus_vouchers}}</p>
+		    <form action="https://www.paypal.com/cgi-bin/webscr"  method="post">
+		    <input type="hidden" name="notify_url" value="{{SITE}}endpoint/">
+		    <input type="hidden" name="business" value="{{PAYPAL_EMAIL}}">
+		    <input type="hidden" name="cmd" value="_xclick">
+		    <input type="hidden" name="item_name" value="MealPlan">
+		    <input type="hidden" name="item_number" value="{{account.id}}">
+		    <input type="hidden" name="amount" value="{{account.total_minus_vouchers}}">
+		    <input type="hidden" name="currency_code" value="USD">
+		    <input type="hidden" name="return" value="{{SITE}}thankyou/">
+		    <input type="hidden" name="cancel_return" value="{{SITE}}menu/">
+		    <input type="image" name="submit"border="0" 
+					src="{{ MEDIA_URL }}css/images/btn-paynow.gif" 
+					width="87" height="31" alt="PayPal - The safer, easier way to pay online">
+		    </form>
+	</div>
+

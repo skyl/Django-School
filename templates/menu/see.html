@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+
+{% block extrahead %} 
+<style>
+.dialogue {
+  background: #ffffff;
+  border: solid 1px #000000;; 
+  }
+img.loading {
+    background: url(http://media.school.simple-url.com/css/images/ajax-loader.gif) no-repeat center center;
+}
+</style>
+<link href="{{MEDIA_URL}}css/jquery-ui-1.7.1.custom.css"  rel="stylesheet" type="text/css" />
+<script src="{{ MEDIA_URL }}js/jquery-ui-1.7.1.custom.min.js"></script>
+<script src="{{ MEDIA_URL }}js/jquery.form.js"></script>
+<script>
+$(function() {
+    //console.log('hi');
+    $('img.loading').hide();
+    $('a.ajax-dialog').click(function(ev) {
+        var hiddenLink = $(this).hide(); 
+	ev.stopPropagation();
+	ev.preventDefault();
+	$(this).next('img.loading').show();
+
+	var href = $(this).attr("href");
+	var dia = $('<div/>');
+	dia.load(href + ' #content', null, function(responseText, textStatus, req) {
+            hiddenLink.show();
+	    $('img.loading').hide();
+	    var titl = $(this).find('h4').hide().html();
+	    dia.dialog({width:760, dialogClass: 'dialogue',
+		open: function(event, ui) { $('img.loading').hide(); },
+		title: titl
+	    });
+	    dia.find('a.ajax-get').click(function(e){
+		dia.dialog("close");
+		e.stopPropagation();
+		e.preventDefault();
+		var cancelRef = $(this).attr("href");
+		$.get(cancelRef, function(){
+			$('div#menu-paynow').load('/menu/paynow/{{account.id}}/');
+			$(ev.target).parents('div:first').removeClass("has-ordered").addClass("not-ordered");
+			dia.dialog("close");
+		});
+	    });
+	    dia.find('div.submit input').click(function(){
+		dia.dialog("close");
+	    });
+	    dia.find('form').ajaxForm(function(){
+		$('div#menu-paynow').load('/menu/paynow/{{account.id}}/');
+		$(ev.target).parents('div:first').removeClass("not-ordered").addClass("has-ordered");
+		dia.dialog("close");
+	    });
+        });
+    });
+});
+  
+$(function() {
+	$('#menu-paynow').click(function(ev) {
+		ev.stopPropagation();
+		ev.preventDefault();
+		alert('There is no account here, this is just a demo.  On the live sites however there is a great IPN system!')
+	});
+});
+</script>
+{% endblock %}
+
+
+{% block content %}
+
+<div id="menu-top">
+
+<div id="menu-instructions">
+    <h2>Order and Payment Deadline: {{dateset.end_taking_orders|date}} </h2>
+<img src="{{MEDIA_URL}}css/images/menu-key.gif" width="373" height="100" alt="legend" />
+</div>
+
+<div id="menu-paynow"><div class="padding-menu-paynow">
+
+    <p class="right">Subtotal: {{account.total}}</p>
+    <p class="right">Credits: -{{ account.vouchers_total }}</p>
+    <p class="right">Total: {{account.total_minus_vouchers}}</p>
+    
+    {% if pay %}
+
+	<form action="https://www.paypal.com/cgi-bin/webscr"  method="post">
+		<input type="hidden" name="notify_url" value="{{SITE}}endpoint/">
+	    <input type="hidden" name="business" value="{{PAYPAL_EMAIL}}">
+	    <input type="hidden" name="cmd" value="_xclick">
+	    <input type="hidden" name="item_name" value="MealPlan">
+	    <input type="hidden" name="item_number" value="{{account.id}}">
+	    <input type="hidden" name="amount" value="{{account.total_minus_vouchers}}">
+	    <input type="hidden" name="currency_code" value="USD">
+	    <input type="hidden" name="return" value="{{SITE}}thankyou/">
+	    <input type="hidden" name="cancel_return" value="{{SITE}}menu/">
+	    <input type="image" name="submit"border="0" src="{{ MEDIA_URL }}css/images/btn-paynow.gif" width="87" height="31" alt="PayPal - The safer, easier way to pay online">
+	</form>
+    {% endif %}
+</div></div>
+
+<div class="clear"></div>
+</div><!-- end id="menu-top" -->
+
+<!-- Begin calendar -->
+<div id='calender'>
+{% for lunch in lunches %}
+{% if forloop.first or lunch.is_first_of_month %}
+<div class="month">
+<h4>{{lunch.month}}</h4>
+</div>
+{% endif %}
+  <div 
+id = "lunch-{{lunch.id}}"
+ {% if foorloop.first or lunch.is_first_of_month%}
+  {% if lunch.is_mon %}
+    class="first-mon"
+  {% endif %}
+  {% if lunch.is_tue %}
+    class="first-tue"
+  {% endif %}
+  {% if lunch.is_wed %}
+    class="first-wed"
+  {% endif %}
+  {% if lunch.is_thu %}
+    class="first-thu"
+  {% endif %}
+  {% if lunch.is_fri %}
+    class="first-fri"
+  {% endif %}
+ {% else %}
+    class="lunch-description"
+ {% endif %}
+>
+
+<div class="menu-box">
+    {{lunch.date|date:"d"}} |<b>    {{lunch.meal.name}} </b>
+{% ifnotequal lunch.meal.type "D"  %}
+<br>
+{{lunch.description}} 
+    {% for student in students %}
+	    {% load logic %}
+	{% if not student|IN:lunch.students_paid %}
+	    {%  if student|IN:lunch.students %}
+	    <div class="has-ordered">
+		    <li>
+		        <a  class="ajax-dialog" 
+			    href="/menu/{{student.id}}/{{lunch.date.year}}/{{lunch.date.month}}/{{lunch.date.day}}/"
+			    >{{student.preferred_name}} &raquo;
+		        </a>
+			<img class="loading" src="{{MEDIA_URL}}img/ajax-loader.gif"></img>
+		    </li>
+	    </div>	
+	    {% else %}		
+	    <div id="{{student.id}}-{{lunch.date.year}}-{{lunch.date.month}}-{{lunch.date.day}}" class="not-ordered">
+		    <li>
+		        <a  class="ajax-dialog"
+			    href="/menu/{{student.id}}/{{lunch.date.year}}/{{lunch.date.month}}/{{lunch.date.day}}/"
+			    >{{student.preferred_name}} &raquo;
+			</a>
+			<img class="loading" src="{{MEDIA_URL}}img/ajax-loader.gif"></img>
+		    </li>
+	    </div>
+	    {% endif %}
+	{% else %}
+		<p class="has-paid">{{student.preferred_name}}</p>
+	{% endif %}
+
+    {% endfor %}
+    
+{% endifnotequal %}
+</div>
+</div>
+
+{% endfor %}
+</div>
+<!-- Here we are outside of the calendar -->
+{% endblock %}
+

@@ -1,0 +1,2 @@
+Account Activation - {{ site }}
+

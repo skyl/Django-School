@@ -1,0 +1,91 @@
+<html>
+<head>
+{% block head %}
+<title>
+{% block title %}Welcome to Django School{% endblock %}
+</title>
+
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="author" content="ligaturedesigns, sos.endofinternet.net">
+<meta name="copyright" content="&copy; Skylar Saveland and Gary Brown">
+<meta name="keywords" content="Web, application, Django, Python, school, information,system, learning, environment, open-source,">
+
+<link rel="shortcut icon" href="favicon.ico">
+<script src="{{MEDIA_URL}}/js/jquery-1.2.6.js" type="text/javascript"></script>
+<script src="{{MEDIA_URL}}/js/jquery-menu.js" type="text/javascript"></script>
+
+<link href="{{MEDIA_URL}}/css/reset.css"  rel="stylesheet" type="text/css" />
+<link href="{{MEDIA_URL}}/css/style.css"  rel="stylesheet" type="text/css" />
+{% endblock %}
+{% block extrahead %}{% endblock %}
+</head>
+{% block onload %} <body> {% endblock %}
+<div id="topright">
+	<div class="logout-outer"><div class="logout-inner"><a href="/accounts/logout/">Logout &raquo;</a></div></div>
+</div>
+
+<div id="container">
+<div id="left">
+<dl id="topnav">
+	<dt><a href="/">Home &raquo;</a></dt>
+	<!--	
+	<dt><b>Learn More &raquo;</b></dt>
+	<dd>
+		<ul>
+			<li><a href="/learn/videos/">Videos &raquo;</a></li>
+			<li><a href="/learn/weblog/">Weblog &raquo;</a></li>
+		</ul>
+	</dd>
+	-->
+	{% if not dash %}
+	<dt><a href="/records/">Family Dashboard &raquo;</a></dt>
+	{% else %}
+	<dt><b>Enrolled Students &raquo;</b></dt>
+	<dd>
+		<ul>
+			{% if students %}
+			{% for s in students %}
+			<li><a href="/records/students/change/{{s.id}}/">{{s}}</a></li>
+			{% endfor %}
+			{% endif %}
+			<li><em><a href="/records/students/add/">Add a student &raquo;</a></em></li>
+		</ul>
+	</dd>
+	<dt><a href="/records/guardians/">Parents/Guardians &raquo;</a></dt>
+	<dt><a href="/records/contacts/">Emergency Contacts &raquo;</a></dt>
+	<dt><a href="/records/pickup/">Student Pickup &raquo;</a></dt>
+	<dt><a href="/records/family/">Grandparents/Friends &raquo;</a></dt>
+	<dt><b>Volunteers &raquo;</b></dt>
+	<dd>
+		<ul>
+			{% if volunteers %}
+			{% for v in volunteers %}
+			<li><a href="/records/volunteer/change/{{v.id}}/">{{v}}</a></li>
+			{% endfor %}
+			{% endif %}
+			<li><em><a href="/records/volunteer/">Add a volunteer &raquo;</a></em></li>
+		</ul>
+	</dd>
+	{% endif %}
+</dl>
+</div>
+
+<div id="main">
+	<div class="welcome">
+{% if user.is_authenticated %}
+You are currently logged in as: <em>{{user}}</em>
+{% else %}
+<em>You are not currently logged in</em>
+{% endif %}
+
+</div>
+	<div id="content">
+	{% block content %}{% endblock %}
+
+	</div>
+</div>
+<div class="clear"></div>
+</div>
+
+</body>
+</html>

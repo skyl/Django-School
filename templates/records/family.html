@@ -1,0 +1,23 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+<h2>CCS Connections</h2>
+<p>This section provides a place for you to add family and/or friends who may be interested in receiving emails or mailings regarding CCS events. 
+Grandparents are, of course, excellent resources to list in these fields. It is our hope that your entire extended family become involved in the 
+education and nurture of your child.</p>
+
+<form id="frmFamily" class="myForm_100" name="input" action="." method="post"><div class="formPadding">
+	 
+    {{ formset.management_form }}
+
+    {% for form in formset.forms %}
+<div class='inner-form'>
+	{{form.as_p}}
+</div>
+		 
+    {% endfor %}
+
+<div class="submit"><input type="submit" value="Update &raquo;"></div>
+</div></form>
+
+{% endblock %}

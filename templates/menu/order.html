@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block extrahead %}
+{% comment %}
+<script>
+    $(function(){
+	    $('a.ajax-get').click(function(ev){
+		ev.stopPropagation();
+		ev.preventDefault();
+
+		var href = $(this).attr("href");
+		$.get(href, function(){
+			$('div#menu-paynow').load('/menu/paynow/{{account.id}}/');
+			$(ev.target).parents('div:first').removeClass("has-ordered").addClass("not-ordered");
+			dia.dialog("close");
+
+		});
+
+
+	    });
+    });
+</script>
+{% endcomment %}
+{% endblock %}
+
+{% block content %}
+<form class="myForm_40em" name="input" action="{{path}}" method="post">
+    <div style="float:left; padding:1em 0 1em 2em;">
+	<h4> {{lunch.date|date}} </h4>
+	<h5> {{lunch.description}} </h5>
+    </div>
+{% if cancel %}
+<div style="float:right;padding: 1em;">
+    <a class="ajax-get" href="/menu/cancel/{{student.id}}/{{lunch.date.year}}/{{lunch.date.month}}/{{lunch.date.day}}/">Cancel Order &raquo;</a>
+    <img class="loading" src="{{MEDIA_URL}}img/ajax-loader.gif"></img>
+</div>
+{% endif %}
+<fieldset style="clear:both;">
+    {{form.as_p}}
+</fieldset>
+<div class="submit"><input type="submit" value="Add/Update &raquo;">
+    <img class="loading" src="{{MEDIA_URL}}img/ajax-loader.gif"></img>
+</div>
+</form>
+{% endblock %}

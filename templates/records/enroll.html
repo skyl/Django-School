@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+{% if students %}
+    <p>Please review your information below and make sure that it is up to date.
+If you need to update something you can go to <a href="/records/">Parent Dashboard &raquo;</a></p>
+    {% for s in students %}
+	{% if s.enrolled_for_upcoming_year %}
+		<p>{{s.preferred_name}} is enrolled for next year!</p>
+        {% else %}
+	        <p><a href="{{s.id}}/">Enroll {{s.preferred_name}} &raquo;</a></p>
+	{% endif %}
+    {% endfor %}
+{%else%}
+    <p>You have no students eligible <a href="/records/apply/">Apply now &raquo;</a> 
+	or <a href="/records/apply/complete/">Check on the status of a pending application &raquo;</a>
+    </p>
+{% endif %}
+{% endblock %}

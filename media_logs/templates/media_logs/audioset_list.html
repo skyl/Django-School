@@ -1,0 +1,18 @@
+{% extends "media/base_audio.html" %}
+
+
+{% block title %}Audio Sets{% endblock %}
+
+
+{% block content_title %}
+  <h2>Audio Sets</h2>
+{% endblock %}
+
+
+{% block content %}
+  <ul>
+  {% for set in object_list %}
+    <li><a href="{{ set.get_absolute_url }}">{{ set.title }}</a> ({{ set.audios.count }} audio{{ set.audios.count|pluralize }})</li>
+  {% endfor %}
+  </ul>
+{% endblock %}

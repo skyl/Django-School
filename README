@@ -1,0 +1,78 @@
+The open source demo version has fallen woefully behind it's commercial counterparts.
+If you would like to help develop django-school please feel free to branch or repurpose.
+You can contact skylar.saveland@gmail.com with any questions or comments.
+
+I guess the MIT or GPL license could go here?
+
+
+Summary
+=======
+
+Django School (Quince) is a web-based school information system.  The system is very customizable
+so that the school can get exactly what it wants and not more.  No extra functionality will be left 
+to clutter or confuse.  The system is intuitive and easy to learn.  
+
+All information can be retrieved with a few clicks and is searchable and sortable.  Get any obscure
+information stored in the system instantly!  Beautiful, unobtrusive Ajax where it is merited.  Ready to
+integrate existing design/logos/styles/flash resources or to create new ones.
+
+If the school desires a feature that is not currently in Quince it should be relatively straight-forward 
+to add.  We look forward to defining further needs and specifications with you so we can improve Quince.
+
+
+Features (in progress features in parenthesis)
+==============================================
+
+* Online Payments Hub
+    * Keep track of all online payments for your school
+    * Paypal integration, records keeping, instant notification
+    * (Google Checkout)
+
+* Application, Registration and Enrollment
+    * Forms
+    * Payments
+    * Tracking
+    * Scheduling
+    * Notification
+    * Easy to set discount timeframes
+    * Easy to integrate with online calendars
+
+* Records
+    * PARENTS enter their data and update throughout the year and during enrollment
+    * Emergency contacts
+    * Pickup People
+    * Allergies and other student information
+	* Disciplinary actions, gold stars, notes, anything you want
+	* Define the data that you want to store and we can easily adapt the
+	  software to your specific needs.
+    * Volunteer organization
+    * Donations
+    * Family members and community
+
+(* Calendars
+    * Make your own, anything you can think of!
+    * Split into intuitive categories
+    * Easy and extensible
+    * Application/Registration/Enrollment
+    * Events
+    * Lunch Menu 
+)
+
+(* News and information
+    * Video archives with search and categories
+    * School Blog
+    * Photo albums
+    * About sections
+    * Easy to add features/flash
+    * Show the world how great your school is in:
+	* Pictures, videos, print
+)
+
+(* Scheduling
+    * Set important dates and dictate what the parents see based on date and time
+    * Group students based on homeroom or other criteria
+	* Attach students to a main teacher or contact
+    * (Create classrooms and schedule the student's days/weeks/semesters/quarters/years)
+	* (Know exactly where a student is supposed to be at any given time)
+	    * (Mark tardies and absences)
+)

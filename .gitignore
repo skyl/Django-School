@@ -1,0 +1,9 @@
+dev.db
+*.pyc
+*.svn
+local_settings.py
+local_settings.py
+*.svn*
+*.swp
+*~
+

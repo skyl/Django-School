@@ -1,0 +1,17 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+<h2><em>Students</em></h2>
+<p>Please use the following form to update student information.</p>
+
+<form id="frmStudents" class="myForm_40em" name="input" action="." method="post">
+ <div class="formPadding">
+
+
+	{{form.as_p}}
+
+
+<div class="submit"><input type="submit" value="Update &raquo;"></div>
+</div></form>
+
+{% endblock %}

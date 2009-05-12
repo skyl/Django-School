@@ -1,0 +1,23 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+<h2>People who can pickup students</h2>
+<p>Please enter up to four family members or friends who are authorized to pickup your children.</p>
+
+<form id="frmPickup" class="myForm_100" name="input" action="/pickup/" method="post"><div class="formPadding">
+
+<!--
+     <div class="formRow"><span class="formCol title200">Name</span><span class="formCol title100">Relationship</span><span class="formCol title150">Phone Number</span></div>	 
+-->	 
+    {{ formset.management_form }}
+
+    {% for form in formset.forms %}
+<div class="inner-form">
+{{form.as_p}}
+</div>
+
+    {% endfor %}
+	<div class="submit"><input type="submit" value="Update &raquo;"></div>
+</div></form>
+
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+ 
+{% block content %}
+<h2>Create an Account</h2>
+<div style="width:42em;">
+<p>Thank you for creating an account. Please create a username and password. You must also provide a valid email address.</p>
+<p>Once you have entered this information and click "Create" an email will be sent to the email address you provided. Simple click on the link in the email to activate your account. Also remember to record you username and password for future reference.</p>
+</div>
+
+<div id="createnew">
+<form class="myForm_40em" name="input" action="." method="post">
+<div class="form">
+<p>You will be able to user your username or email address as your username when you login.</p>
+{% for field in form %}
+<div class="field-wrapper">
+    {{ field.label_tag }}
+    {{ field }}
+    {% if field.help_text %}{{ field.help_text }}{% endif %}
+    {% if field.errors %}{{ field.errors }}{% endif %}
+</div>
+{% endfor %}
+</br>
+<br>
+<div class="submit"><input type="submit" value="Create &raquo;"></div>
+</form>
+</div>
+{% endblock %}
+

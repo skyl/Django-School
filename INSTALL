@@ -1,0 +1,21 @@
+1) clone the repository
+
+  * git clone git://github.com/ssavelan/django-school.git  
+
+2) Fix up your settings.
+
+cd django-school (or custom name)
+mv empty_local_settings.py local_settings.py
+
+open a Python Interpreter and run:
+
+from random import choice
+''.join([choice('abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)') for i in range(50)])
+ 
+paste the result for your SECRET_KEY in local_settings.py
+
+Set LIVE=False in your settings.py to run devel server with sqlite.
+
+4) syncdb, runserver
+
+

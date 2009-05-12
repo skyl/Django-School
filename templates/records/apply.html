@@ -1,0 +1,32 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+
+<h2>Information about the Student</h2>
+<p>This is the introduction section or explanatory paragraph.</p>
+
+<form class="myForm_100" name="input" action="." method="post"><div class="formPadding">
+
+{% for field in form %}
+
+    <div class="field-wrapper">
+	<span class="label_tag">
+		{% if field.field.required %}
+			<b>{{ field.label }}</b>
+		{% else %}
+			   {{field.label }}
+		{% endif %}</span>
+	<span class="field">{{ field }}</span>
+    
+	{% if field.help_text %}<div class="help_text">{{field.help_text}}</div>{% endif %}
+	{% if field.errors %}<div class="myerrors">{{ field.errors }}</div>{% endif %}
+    </div>
+
+{% endfor %}
+
+<div class="submit"><input type="submit" value="Update &raquo;"></div>
+
+</div></form> 
+
+{% endblock %}
+

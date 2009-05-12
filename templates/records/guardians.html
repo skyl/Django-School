@@ -1,0 +1,35 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+<h2><em>Parents/Guardians</em></h2>
+<p>The parent(s) or legal guardians for this household.</p>
+
+<form class="myForm_100" name="input" action="." method="post"><div class="formPadding">
+    {{ formset.management_form }}
+
+    {% for form in formset.forms %}
+<div class="inner-form">
+        {% for field in form %}
+  <div class="field-wrapper">
+            {% ifnotequal field.name 'id' %}
+                {% ifnotequal field.name 'user' %}
+		{% if field.field.required %}
+			<b>{{ field.label_tag }} </b>
+		{% else %}
+			{{field.label_tag}}
+		{% endif %}
+			{{field.help_text}}
+	    {% endifnotequal %}{% endifnotequal %}
+
+	<span class="field">{{ field }}</span>
+            {% if field.errors %}
+	<span class="errors">{{ field.errors }}</span>
+			{% endif %}
+  </div>
+        {% endfor %}
+</div>
+    {% endfor %}
+<div class="submit"><input type="submit" value="Update &raquo;"></div>
+</div></form>
+
+{% endblock %}

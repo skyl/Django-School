@@ -1,0 +1,28 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+
+<h2>Middle School Student Questionnaire</h2>
+<p>This part of the application is to be completed by the student.</p>
+
+<form class="myForm_100" name="input" action="." method="post"><div class="formPadding">
+
+<h4>Tell us about yourself!</h4>
+{% for field in form %}
+
+<div class="center_text">
+{% ifequal field.name "music"%} <p>On a scale of 1 to 5, tell us how interested you are in the following activities (5 is highest)</p>{% endifequal %}
+			   {{field.label_tag }}
+	{% if field.help_text %}<div class="help_text">{{field.help_text}}</div>{% endif %}
+			   {{ field }}
+	{% if field.errors %}<div class="myerrors">{{ field.errors }}</div>{% endif %}
+
+</div>
+
+{% endfor %}
+<div class="submit"><input type="submit" value="Update &raquo;"></div>
+
+</div></form> 
+
+{% endblock %}
+

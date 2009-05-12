@@ -1,0 +1,31 @@
+{% extends "records/base.html" %}
+
+{% block content %}
+
+<h2>Household Profile</h2>
+<p>This information may be updated at any time throughout the year.</p>
+
+<form class="myForm_40em" name="input" action="." method="post"><div class="formPadding">
+
+{% for field in form %}
+
+    <div class="field-wrapper">
+		{% if field.field.required %}
+			<b>{{ field.label_tag }}</b>
+		{% else %}
+			   {{field.label_tag }}
+		{% endif %}
+	<span class="field">{{ field }}</span>
+    
+	{% if field.help_text %}<div class="help_text"><p>{{field.help_text}}</p></div>{% endif %}
+	{% if field.errors %}{{ field.errors }}{% endif %}
+    </div>
+
+{% endfor %}
+
+<div class="submit"><input type="submit" value="Update &raquo;"></div>
+
+</div></form> 
+
+{% endblock %}
+

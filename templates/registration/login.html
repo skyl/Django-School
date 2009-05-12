@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% comment %}
+{% block extrahead %}<script type='text/javascript' 
+        src='http://getfirebug.com/releases/lite/1.2/firebug-lite-compressed.js'></script>
+ {% endblock %}
+{% endcomment %}
+	{% block content %}
+<h2>Login</h2>
+<div style="width:42em;padding:0 0 .5em 0"><p>Welcome to the new records keeping system.  If you do not have a username and password please create an account.  An email will be sent to you for activation.</p>
+</div>
+{% if form.errors %}
+<p style="width:40em;">Your username and password didn't match. Please try again.  Have you activated your account?  If you continue to have trouble please contact 123-123-1234</p>
+{% endif %}
+
+<form class="myForm_40em" name="input" action="." method="post"><div class="formPadding">
+
+<p>You can use your username or the email you provided as your username.</p>
+<div class="field-wrapper">
+{{ form.username.label_tag }}{{ form.username }}
+</div>
+<div class="field-wrapper">
+{{ form.password.label_tag }}{{ form.password }}
+</div>
+
+<div class="submit"><input type="submit" value="Enter &raquo;"></div>
+<input type="hidden" name="next" value="{{ next }}" />
+
+</div></form>
+
+<p>
+<a href="/accounts/register/"><img src="{{MEDIA_URL}}/css/images/create-account-btn.gif" width="214" height="48" alt="Create a new account! &raquo;"/></a>
+</p>
+{% endblock %}

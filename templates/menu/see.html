@@ -34,6 +34,7 @@ $(function() {
 		title: titl
 	    });
 	    dia.find('a.ajax-get').click(function(e){
+		$(ev.target).parents('div:first').removeClass("has-ordered").addClass("not-ordered");
 		dia.dialog("close");
 		e.stopPropagation();
 		e.preventDefault();
@@ -46,6 +47,7 @@ $(function() {
 	    });
 	    dia.find('div.submit input').click(function(){
 		dia.dialog("close");
+		$(ev.target).parents('div:first').removeClass("not-ordered").addClass("has-ordered");
 	    });
 	    dia.find('form').ajaxForm(function(){
 		$('div#menu-paynow').load('/menu/paynow/{{account.id}}/');
